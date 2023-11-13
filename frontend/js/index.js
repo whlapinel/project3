@@ -33,17 +33,13 @@ searchInput.addEventListener("change", filterPosts);
 async function filterPosts() {
   currentPage = 1;
   searchKey = searchInput.value;
-  console.log(searchKey);
   await getPosts();
 }
 
 function displayDetails(e) {
   const selectedCard = e.target.closest(".card");
-
   // verify user clicked on descendant element of card
   if (selectedCard !== null) {
-    console.log(selectedCard);
-    console.log(selectedCard.dataset.id);
     location.assign(`./details.html?id=${selectedCard.dataset.id}`);
   }
 }
@@ -64,7 +60,7 @@ async function getPosts() {
   try {
     if (searchKey !== "") {
       console.log(`search key is not empty string`);
-      url = `http://localhost:3000/posts?q=${searchKey}&_page=${currentPage}&_limit=${PAGE_LIMIT}&_sort=date`;
+      url = `http://localhost:3000/posts?q=${searchKey}&_page=${currentPage}&_limit=${PAGE_LIMIT}&_sort=date&_order=desc`;
     } else {
       console.log(`search key is empty string`);
       url = `http://localhost:3000/posts?_page=${currentPage}&_limit=${PAGE_LIMIT}&_sort=date&_order=desc`;
